@@ -1,0 +1,48 @@
+#var hangman is used to store the game
+def hangman(word):
+#var wrong keeps track of incorrect guess
+    wrong = 0
+    stages =["",
+            "____________       ",
+            "|                  ",
+            "|             |    ",
+            "|             0    ",
+            "|            /|\   ",
+            "|            / \   ",
+            "|                  "
+             ]
+#rletters is a list containing characters from word to keep track of what letters are left 
+    rletters = list(word)
+#board is a list of strings that keeps track of hints that have been displayed
+    board = ["__"] * len(word)
+#var win keeps track on if player has won the game yet
+    win = False
+    print("Welcome to Hangman")
+    
+#loop that keeps game going
+
+    while wrong < len(stages) - 1:
+        print("\n")
+        msg = "Guess a letter " ""
+        char = input(msg)
+        if char in rletters:
+            cind = rletters.index(char)
+            board[cind] = char
+            rletters[cind] = '$'
+        else:
+            wrong += 1
+        print((" ".join(board)))
+        e = wrong + 1
+        print("\n".join(stages[0 : e]))
+        if "__" not in board:
+            print("You Win!")
+            print(" ".join(board))
+            win = True
+            break
+        
+    if not win:
+        print("\n".join(stages[0: wrong]))
+        print("You lose! It was {}.".format(word))      
+        
+        
+hangman("iphone")
